@@ -9,3 +9,5 @@ practice
 
 # obj dir
 .obj
+libasm.a
+test_program
