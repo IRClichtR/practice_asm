@@ -2,6 +2,7 @@ NAME = libasm.a
 
 MANDATORY_DIR = mandatory
 BONUS_DIR = bonus
+OBJ_DIR = .obj
 
 SRCS = \
 	$(MANDATORY_DIR)/ft_strlen.s \
@@ -10,14 +11,14 @@ SRCS = \
 	$(MANDATORY_DIR)/ft_write.s \
 	$(MANDATORY_DIR)/ft_read.s \
 	$(MANDATORY_DIR)/ft_strdup.s
-OBJS = $(SRCS:.s=.o)
+OBJS = $(patsubst %.s,$(OBJ_DIR)/%.o,$(SRCS))
 
 BONUS_SRCS = \
 	$(BONUS_DIR)/ft_list_size.s \
 	$(BONUS_DIR)/ft_list_push_front.s \
 	$(BONUS_DIR)/ft_list_sort.s \
 	$(BONUS_DIR)/ft_list_remove_if.s
-BONUS_OBJS = $(BONUS_SRCS:.s=.o)
+BONUS_OBJS = $(patsubst %.s,$(OBJ_DIR)/%.o,$(BONUS_SRCS))
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -25,6 +26,8 @@ CFLAGS = -Wall -Wextra -Werror
 ASM = nasm
 ASFLAGS = -f elf64
 
+AR = ar 
+ARFLAGS = rcs
 
 
 
@@ -32,12 +35,14 @@ ASFLAGS = -f elf64
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(ASM) $(ASFLAGS) $@ $^
+	$(AR) $(ARFLAGS) $@ $^
 
 bonus: $(OBJS) $(BONUS_OBJS)
-	$(ASM) $(ASFLAGS) $(NAME) $^
+	$(AR) $(ARFLAGS) $(NAME) $^
 
-%.o: %.s
+$(OBJ_DIR)/%.o: %.s
+	@echo "Compiling $< into $@"
+	@mkdir -p $(dir $@)
 	$(ASM) $(ASFLAGS) $< -o $@
 
 clean:
@@ -49,9 +54,9 @@ fclean: clean
 re: fclean all
 
 test: $(NAME)
-	$(CC) $(CFLAGS) ./test/test.c -L. -lasm 
+	$(CC) $(CFLAGS) ./test/test.c -L. -lasm -o test_program
 
-.PHONY: all bonus clean fclean re
+.PHONY: all bonus clean fclean re 
 
 help:
 	@echo "Available targets:"
@@ -62,3 +67,23 @@ help:
 	@echo "  re      : Rebuild everything"
 	@echo "  test    : Build a test program (requires main.c)"
 	@echo "  help    : Show this help message"
+	@echo "  debug	 : Show the value of some variables"
+
+debug:
+	@echo "=== Source Files ==="
+	@echo "SRCS = $(SRCS)"
+	@echo ""
+	@echo "=== Object Files ==="
+	@echo "OBJS = $(OBJS)"
+	@echo ""
+	@echo "=== Bonus Source Files ==="
+	@echo "BONUS_SRCS = $(BONUS_SRCS)"
+	@echo ""
+	@echo "=== Bonus Object Files ==="
+	@echo "BONUS_OBJS = $(BONUS_OBJS)"
+	@echo ""
+	@echo "=== Commands ==="
+	@echo "ASM = $(ASM)"
+	@echo "ASFLAGS = $(ASFLAGS)"
+	@echo "AR = $(AR)"
+	@echo "ARFLAGS = $(ARFLAGS)"
