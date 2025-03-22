@@ -6,3 +6,6 @@ practice
 *~
 *.un~
 
+
+# obj dir
+.obj
