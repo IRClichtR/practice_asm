@@ -1,0 +1,8 @@
+# practice_dir
+practice
+
+# vim files
+*.swp
+*~
+*.un~
+
