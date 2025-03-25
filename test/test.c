@@ -23,7 +23,7 @@ int main(void)
     printf("\n");
 
 
-    printf("2 -ft_strcmp\n");
+    printf("2 - ft_strcmp\n");
     printf("string for test: '%s' | '%s'\n", str, str);
     printf("strcmp: %d\n", strcmp(str, str));
     printf("ft_strcmp: %d\n", ft_strcmp(str, str));
@@ -33,7 +33,7 @@ int main(void)
     printf("\n");
 
 
-    printf("3 -ft_strcpy\n");
+    printf("3 - ft_strcpy\n");
     printf("string for test: '%s' with a dest of char[100] dest and a char[10] dest (< src len)\n", str);
     char dest[100];
     printf("ft_strcpy: %s\n", strcpy(dest, str));

@@ -2,13 +2,13 @@ section .text
     global ft_strcpy
 
 ft_strcpy:
-
     .loop:
         mov cl, [rsi]
-        mov [rdi], cl
+        mov [rdi], cl 
+        cmp cl, 0
+        je .end
         inc rdi
         inc rsi
-        test cl, cl
-        jnz .loop
+        jmp .loop
     .end:
         ret

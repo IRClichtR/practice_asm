@@ -1,7 +1,20 @@
+# Some useful references 
+
+## Learn assembly free course on youtube
+https://www.youtube.com/watch?v=yBO-EJoVDo0&list=PL2EF13wm-hWCoj6tUBGUmrkJmH1972dBB
+
+Interesting youtube thread where you'll learn : 
+- Binary operations
+- Basic x86 architecture (32bits)
+- Memory, Arithmetics, Logic and File manipulation
+- Os Dev
+
+## Very useful assembly tutorial repository
+https://github.com/mschwartz/assembly-tutorial/tree/main
+
+
 # Guide to x86-64 Assembly Instructions
 
-## Introduction
-This guide covers the core x86-64 assembly instructions discussed in our sessions. The document focuses on 64-bit Intel syntax assembly as compiled with NASM, following the standard calling convention.
 
 ## Register Basics
 
