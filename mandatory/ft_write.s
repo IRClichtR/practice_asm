@@ -11,7 +11,7 @@ ft_write:
 .error:
     neg rax
     mov rdi, rax
-    call __errno_location
+    call __errno_location WRT ..plt ; relocate the call to __errno_location in the PLT
     mov [rax], rdi
-    mov rax, -1\
+    mov rax, -1
     ret

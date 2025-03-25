@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 size_t ft_strlen(const char *str);
 int ft_strcmp(const char *s1, const char *s2);
 char *ft_strcpy(char *dest, const char *src);
+ssize_t ft_write(int fd, const void *buf, size_t count);
+ssize_t ft_read(int fd, void *buf, size_t count);
 
 int main(void) 
 {
@@ -42,5 +46,29 @@ int main(void)
     printf("ft_strcpy: %s\n", ft_strcpy(dest2, str));
     printf("strcpy: %s\n", strcpy(dest2, str));
     printf("\n");
+
+
+    printf("4 - ft_write\n");
+    printf("string for test: '%s'\n", str);
+    printf("ft_write: %zd\n", ft_write(1, str, ft_strlen(str)));
+    printf("write: %zd\n", write(1, str, ft_strlen(str)));
+    printf("test error\n");
+    printf("ft_write: %zd\n", ft_write(111, str, ft_strlen(str)));
+    printf("write: %zd\n", write(111, str, ft_strlen(str)));
+    printf("\n");
+
+    printf("5 - ft_read\n");
+    char buf[100];
+    int fd = open("test.txt", O_RDONLY);
+    printf("ft_read: %zd\n", ft_read(fd, buf, 100));
+    close(fd);
+    int fd2 = open("test.txt", O_RDONLY);
+    printf("read: %zd\n", read(fd2, buf, 100));
+    close(fd2);
+    printf("test error\n");
+    printf("ft_read: %zd\n", ft_read(111, str, ft_strlen(str)));
+    printf("read: %zd\n", read(111, str, ft_strlen(str)));
+    printf("\n");
+    
     return (0);
 }
