@@ -2,12 +2,14 @@
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdlib.h>
 
 size_t ft_strlen(const char *str);
 int ft_strcmp(const char *s1, const char *s2);
 char *ft_strcpy(char *dest, const char *src);
 ssize_t ft_write(int fd, const void *buf, size_t count);
 ssize_t ft_read(int fd, void *buf, size_t count);
+char *ft_strdup(const char *s);
 
 int main(void) 
 {
@@ -69,6 +71,15 @@ int main(void)
     printf("ft_read: %zd\n", ft_read(111, str, ft_strlen(str)));
     printf("read: %zd\n", read(111, str, ft_strlen(str)));
     printf("\n");
+
+    printf("6 - ft_strdup\n");
+    printf("string for test: '%s'\n", str);
+    char *dup = ft_strdup(str);
+    printf("ft_strdup: %s\n", dup);
+    free(dup);
+    char *dup2 = strdup(str);
+    printf("strdup: %s\n", dup2);
+    free(dup2);
     
     return (0);
 }
